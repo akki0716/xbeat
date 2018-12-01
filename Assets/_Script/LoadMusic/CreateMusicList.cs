@@ -43,7 +43,7 @@ public class CreateMusicList : MonoBehaviour {
 		//ジャンルフォルダ一覧を取得
 		DirectoryInfo[] genreFolderInfo = baseDir.GetDirectories("*" , SearchOption.TopDirectoryOnly);
 
-
+		//ジャンルごとに曲を探しに行く
 		for (int i = 0 ; i < genreFolderInfo.Length ; i++)
 		{
 			MakeGenres(genreFolderInfo[i]);
@@ -62,19 +62,21 @@ public class CreateMusicList : MonoBehaviour {
 	{
 		string m = "ジャンル:" + genreFolderInfo.Name;
 		//createMessage.CreateMsg(CreateMessage.Msgcode.serching , m , true);
+		createMessage.CreateMsg((int)MsgCodeInfo.serching , m);
 
 		//各ジャンルごとの曲フォルダ一覧を取得
 		DirectoryInfo[] musicFolderInfo = genreFolderInfo.GetDirectories("*" , SearchOption.TopDirectoryOnly);
 
 		if (musicFolderInfo.Length == 0)
 		{
+			createMessage.CreateMsg((int)MsgCodeNotice.noSong , genreFolderInfo.Name);
 			//createMessage.CreateErrMsg(CreateMessage.Errcode.noSong , genreFolderInfo.Name);
 		}
 
 		//ジャンルごとの曲一覧を定義
 		List<MusicInfo> musicInfoList = new List<MusicInfo>();
 
-		//1曲ごとに中のファイルを探索、リストに追加
+		//1曲ごとに中のファイルを探索
 		for (int j = 0 ; j < musicFolderInfo.Length ; j++)
 		{
 			musicInfoList.Add(MakeMusicInfo(musicFolderInfo[j] , musicFolderInfo[j].Name));

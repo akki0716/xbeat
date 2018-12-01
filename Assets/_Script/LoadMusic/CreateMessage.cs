@@ -40,24 +40,20 @@ public class CreateMessage : MonoBehaviour {
 	int[] codeErrorRange = new int[2] { 3000 , 3999 };
 
 	//enumのコード、メッセージの順
-	Dictionary<int,  string> MessageDict = new Dictionary<int , string>();
-
-
-
-	private void Awake ()
+	Dictionary<int,  string> MessageDict = new Dictionary<int , string>()
 	{
-		MessageDict.Add((int)MsgCodeInfo.loadStart, "曲ロード開始\n");
-		MessageDict.Add((int)MsgCodeInfo.serching , "{addMsg1}の曲を検索中\n");
-		MessageDict.Add((int)MsgCodeInfo.madeFolder, "{addMsg1}フォルダを作成しました。\n");
+		{(int)MsgCodeInfo.loadStart, "曲ロード開始\n"},
+		{(int)MsgCodeInfo.serching ,  "{addMsg1}の曲を検索中\n"},
+		{(int)MsgCodeInfo.madeFolder, "{addMsg1}フォルダを作成しました。\n"},
 
-		MessageDict.Add((int)MsgCodeNotice.noSong , "ジャンル:{addMsg1}に属する曲がありません。\n");
-		MessageDict.Add((int)MsgCodeNotice.noSong , "{addMsg1}のジャケットファイルがありません。\n");
+		{(int)MsgCodeNotice.noSong ,  "ジャンル:{addMsg1}に属する曲がありません。\n"},
+		{(int)MsgCodeNotice.noJacket ,  "{addMsg1}のジャケットファイルがありません。\n"},
 
-		MessageDict.Add((int)MsgCodeError.reboot , "アプリを再起動してください。\n");
-		MessageDict.Add((int)MsgCodeError.moveCancel , "遷移キャンセル\nアプリを再起動してください。\n");
-		MessageDict.Add((int)MsgCodeError.noSound , "{addMsg1}の音源ファイルがありません。\n");
-		MessageDict.Add((int)MsgCodeError.noSound , "{addMsg1}の譜面ファイルがありません。\n");
-	}
+		{(int)MsgCodeError.reboot , "アプリを再起動してください。\n" },
+		{(int)MsgCodeError.moveCancel , "遷移キャンセル\nアプリを再起動してください。\n"},
+		{(int)MsgCodeError.noSound , "{addMsg1}の音源ファイルがありません。\n"},
+		{(int)MsgCodeError.noScore , "{addMsg1}の譜面ファイルがありません。\n"}
+	};
 
 
 	/// <summary>

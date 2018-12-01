@@ -1,0 +1,9 @@
+{
+ // codic API Access Token
+ "codic.ACCESS_TOKEN": "Zuwdn1IyDioDy8iPW1mqYh9Fq3hHQcSQJx",
+
+ // 単語の連結方法を指定します。"PascalCase", "camelCase", "snake_case", "SNAKE_CASE", "hy-phen-a-tion", "no case" から一つ選んでください。
+ "codic.case": "camelCase"
+
+
+}

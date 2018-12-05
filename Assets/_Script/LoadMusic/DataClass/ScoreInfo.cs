@@ -23,10 +23,10 @@ public class ScoreInfo
 	private string dispBPM;
 
 	[SerializeField]
-	private string scorePathEasy;
+	private string scorePath;
 
 	[SerializeField]
-	private string soundPath;
+	private string musicPath;
 
 	[SerializeField]
 	private string jacketPath;
@@ -83,19 +83,6 @@ public class ScoreInfo
 		}
 	}
 
-	public string ScorePathEasy
-	{
-		get
-		{
-			return scorePathEasy;
-		}
-
-		set
-		{
-			scorePathEasy = value;
-		}
-	}
-
 	public string Difficalty
 	{
 		get
@@ -109,16 +96,16 @@ public class ScoreInfo
 		}
 	}
 
-	public string SoundPath
+	public string MusicPath
 	{
 		get
 		{
-			return soundPath;
+			return musicPath;
 		}
 
 		set
 		{
-			soundPath = value;
+			musicPath = value;
 		}
 	}
 
@@ -132,6 +119,19 @@ public class ScoreInfo
 		set
 		{
 			jacketPath = value;
+		}
+	}
+
+	public string ScorePath
+	{
+		get
+		{
+			return scorePath;
+		}
+
+		set
+		{
+			scorePath = value;
 		}
 	}
 }

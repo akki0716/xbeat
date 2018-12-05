@@ -8,20 +8,21 @@ public class CreateMusicList : MonoBehaviour {
 	[SerializeField] CreateMessage createMessage;
 	[SerializeField] DirCheck dirCheck;
 	[SerializeField] CreateJSON createJSON;
-	[SerializeField] GetPxbpInfo getPxbpInfo;
+	[SerializeField] GetPxbpInfo getPxbpInfo;//todo 要らなくなったら消す
+	[SerializeField] GetMusicInfo getMusicInfo;
 
 
-	private const string ext_mp3 = ".mp3";
-	private const string ext_ogg = ".ogg";
-	private const string ext_wav = ".wav";
-	private const string ext_jpeg = ".jpeg";
-	private const string ext_jpg = ".jpg";
-	private const string ext_png = ".png";
-	private const string ext_pxbp = ".pxbp";
+	public const string ext_mp3 = ".mp3";
+	public const string ext_ogg = ".ogg";
+	public const string ext_wav = ".wav";
+	public const string ext_jpeg = ".jpeg";
+	public const string ext_jpg = ".jpg";
+	public const string ext_png = ".png";
+	public const string ext_pxbp = ".pxbp";
 
-	private const string keySound = "SOUND";
-	private const string keyScore = "SCORE";
-	private const string keyJacket = "JACKET";
+	public const string keySound = "SOUND";
+	public const string keyScore = "SCORE";
+	public const string keyJacket = "JACKET";
 
 	[SerializeField] private List<GenreInfo> genres = new List<GenreInfo>();
 
@@ -61,7 +62,6 @@ public class CreateMusicList : MonoBehaviour {
 	private void MakeGenres ( DirectoryInfo genreFolderInfo )
 	{
 		string m = "ジャンル:" + genreFolderInfo.Name;
-		//createMessage.CreateMsg(CreateMessage.Msgcode.serching , m , true);
 		createMessage.CreateMsg((int)MsgCodeInfo.serching , m);
 
 		//各ジャンルごとの曲フォルダ一覧を取得
@@ -69,8 +69,7 @@ public class CreateMusicList : MonoBehaviour {
 
 		if (musicFolderInfo.Length == 0)
 		{
-			createMessage.CreateMsg((int)MsgCodeNotice.noSong , genreFolderInfo.Name);
-			//createMessage.CreateErrMsg(CreateMessage.Errcode.noSong , genreFolderInfo.Name);
+			createMessage.CreateMsg((int)MsgCodeNotice.noMusic , genreFolderInfo.Name);
 		}
 
 		//ジャンルごとの曲一覧を定義
@@ -102,8 +101,27 @@ public class CreateMusicList : MonoBehaviour {
 		MusicInfo musicInfo = new MusicInfo();
 		FileInfo[] musicFolderFiles = musicFolderInfo.GetFiles("*" , SearchOption.TopDirectoryOnly);
 
-		CheckFileExist(musicFolderFiles, musicName);
+		bool existJacket = CheckFileExist(musicFolderFiles, musicName);
 
+
+
+		musicInfo = getMusicInfo.GetInfo(musicFolderFiles, musicName);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 		bool dispSoundErr = false;
 		bool dispJacketErr = false;
 		bool dispSocreErr = false;
@@ -112,7 +130,6 @@ public class CreateMusicList : MonoBehaviour {
 		{
 			//特定の拡張子のファイルリストを取得
 			Dictionary<string , string> specificFile = GetMusicInfo (musicFolderFiles);
-			/*
 			//音源取得
 			if (specificFile.ContainsKey(keySound))
 			{
@@ -161,9 +178,9 @@ public class CreateMusicList : MonoBehaviour {
 			{
 				songInfo.ScorePath5 = specificFile[keyScore + "5"];
 			}
-*/
 		}
 
+*/
 		return musicInfo;
 
 		/*
@@ -175,7 +192,7 @@ public class CreateMusicList : MonoBehaviour {
 	}
 
 	
-	
+	/*
 	//フォルダ内のファイル一覧からMusicInfoに格納する情報を返す
 	private Dictionary<string , string> GetMusicInfo ( FileInfo[] songFolderFiles )
 	{
@@ -237,13 +254,13 @@ public class CreateMusicList : MonoBehaviour {
 
 		return specificFiles;
 	}
-	
+	*/
 
 
 	/// <summary>
 	/// 音源ファイルとジャケットファイルと譜面ファイルの存在チェック
 	/// </summary>
-	private void CheckFileExist ( FileInfo[] musicFolderFiles , string musicName)
+	private bool CheckFileExist ( FileInfo[] musicFolderFiles , string musicName)
 	{
 		bool existMusic = false;
 		bool existJacket = false;
@@ -272,7 +289,22 @@ public class CreateMusicList : MonoBehaviour {
 
 		if (!existMusic)
 		{
-			//createMessage.CreateErrMsg();
+			createMessage.CreateMsg((int)MsgCodeError.noMusic , musicName);
+			return false;//CreateMsgのエラーで止まるはずなのでこれが返ることはない
+		}
+		if (!existPxbp)
+		{
+			createMessage.CreateMsg((int)MsgCodeError.noScore , musicName);
+			return false;//CreateMsgのエラーで止まるはずなのでこれが返ることはない
+		}
+		if (!existJacket)
+		{
+			createMessage.CreateMsg((int)MsgCodeNotice.noJacket , musicName);
+			return false;//これは意味のある戻り値
+		}
+		else
+		{
+			return true;//これは意味のある戻り値
 		}
 	}
 	

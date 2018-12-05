@@ -23,7 +23,7 @@ public class CreateMessage : MonoBehaviour {
 	/// </summary>
 	public enum MsgCodeNotice
 	{
-		moveCancel = 2000 , noSong, noJacket
+		moveCancel = 2000 , noMusic, noJacket
 	}
 
 	/// <summary>
@@ -31,7 +31,7 @@ public class CreateMessage : MonoBehaviour {
 	/// </summary>
 	public enum MsgCodeError
 	{
-		reboot = 3000, moveCancel, noSound, noScore
+		reboot = 3000, moveCancel, noMusic, noScore, duplicateMusic, duplicateJacket, noMainScore
 	}
 
 	//各コードの範囲をintで持つ
@@ -42,17 +42,25 @@ public class CreateMessage : MonoBehaviour {
 	//enumのコード、メッセージの順
 	Dictionary<int,  string> MessageDict = new Dictionary<int , string>()
 	{
-		{(int)MsgCodeInfo.loadStart, "曲ロード開始\n"},
-		{(int)MsgCodeInfo.serching ,  "{addMsg1}の曲を検索中\n"},
-		{(int)MsgCodeInfo.madeFolder, "{addMsg1}フォルダを作成しました。\n"},
+		/*追加時には末尾にカンマを忘れずに*/
 
-		{(int)MsgCodeNotice.noSong ,  "ジャンル:{addMsg1}に属する曲がありません。\n"},
-		{(int)MsgCodeNotice.noJacket ,  "{addMsg1}のジャケットファイルがありません。\n"},
+		{(int)MsgCodeInfo.loadStart, "曲ロード開始\n"},
+		{(int)MsgCodeInfo.serching ,  "\"{addMsg1}\"の曲を検索中\n"},
+		{(int)MsgCodeInfo.madeFolder, "\"{addMsg1}\"フォルダを作成しました。\n"},
+
+		{(int)MsgCodeNotice.noMusic ,  "ジャンル:{addMsg1}に属する曲がありません。\n"},
+		{(int)MsgCodeNotice.noJacket ,  "\"{addMsg1}\"のジャケットファイルがありません。\n"},
 
 		{(int)MsgCodeError.reboot , "アプリを再起動してください。\n" },
 		{(int)MsgCodeError.moveCancel , "遷移キャンセル\nアプリを再起動してください。\n"},
-		{(int)MsgCodeError.noSound , "{addMsg1}の音源ファイルがありません。\n"},
-		{(int)MsgCodeError.noScore , "{addMsg1}の譜面ファイルがありません。\n"}
+		{(int)MsgCodeError.noMusic , "\"{addMsg1}\"の音源ファイルがありません。\n"},
+		{(int)MsgCodeError.noScore , "\"{addMsg1}\"の譜面ファイルがありません。\n"},
+		{(int)MsgCodeError.duplicateMusic , "\"{addMsg1}\"の音源ファイルが重複しています。\n" +
+			"フォルダ名と同一の音源ファイルは一つにしてください。\n"},
+		{(int)MsgCodeError.duplicateJacket , "\"{addMsg1}\"のジャケットファイルが重複しています。\n" +
+			"フォルダ名と同一のジャケットファイルは一つにしてください。\n"},
+		{(int)MsgCodeError.noMainScore , "\"{addMsg1}\"にフォルダと同名の譜面ファイルがありません。\n" +
+			"各フォルダには必ず一つ同名の譜面ファイルを配置してください。\n"},
 	};
 
 

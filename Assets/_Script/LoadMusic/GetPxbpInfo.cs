@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+//廃止予定
 public class GetPxbpInfo : MonoBehaviour {
 	[SerializeField] LoadPxbp loadPxbp;
 	[SerializeField] CreateMessage createMessage;

@@ -13,6 +13,12 @@ public class MusicInfo {
 	private int musicID;
 
 	[SerializeField]
+	private string musicName;
+
+	[SerializeField]
+	private string artistName;
+
+	[SerializeField]
 	public List<ScoreInfo> scoreListEasy = new List<ScoreInfo>();
 
 	[SerializeField]
@@ -26,6 +32,45 @@ public class MusicInfo {
 
 	[SerializeField]
 	public List<ScoreInfo> scoreListUnlimited = new List<ScoreInfo>();
+
+	public string MusicName
+	{
+		get
+		{
+			return musicName;
+		}
+
+		set
+		{
+			musicName = value;
+		}
+	}
+
+	public string ArtistName
+	{
+		get
+		{
+			return artistName;
+		}
+
+		set
+		{
+			artistName = value;
+		}
+	}
+
+	public int MusicID
+	{
+		get
+		{
+			return musicID;
+		}
+
+		set
+		{
+			musicID = value;
+		}
+	}
 
 
 	/*

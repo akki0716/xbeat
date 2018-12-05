@@ -11,15 +11,17 @@ public class DispMessage : MonoBehaviour {
 
 	public string Message { get; set; }
 
-	public void ShowMesseage (int msgLevel , string message)
+	public void ShowMesseage (int msgLevel , string dispMessage)
 	{
-		message = EditMessage(msgLevel , message);
-		Message += message;
+		dispMessage = EditMessage(msgLevel , dispMessage);
+		Message += dispMessage;
 		msg.text = Message;
 		if (msgLevel == 3)
 		{
 			Debug.Log(Message);
-			throw new Exception("エラーが発生しました。内容は直前のログを参照。");
+			Message += "\n上記エラーを解消してからアプリを再起動してください。";
+			msg.text = Message;
+			throw new Exception("エラーが発生しました。\n内容:" + dispMessage);
 		}
 	}
 
@@ -27,15 +29,15 @@ public class DispMessage : MonoBehaviour {
 	{
 		if (msgLevel == 1)//情報
 		{
-			return message = message.Insert(0 , "<color=#ffffff>[Info]:</color>");
+			return message = message.Insert(0 , "<color=#ffffff>[Info]</color>:");
 		}
 		else if (msgLevel == 2)//注意
 		{
-			return message = message.Insert(0, "<color=#efe700>[Notice]:</color>");
+			return message = message.Insert(0, "<color=#efe700>[Notice]</color>:");
 		}
 		else if (msgLevel == 3)//エラー
 		{
-			return message = message.Insert(0 , "<color=#be0000>[Error]:</color>");
+			return message = message.Insert(0 , "<color=#be0000>[Error]</color>:");
 		}
 		else if (msgLevel == 4)
 		{

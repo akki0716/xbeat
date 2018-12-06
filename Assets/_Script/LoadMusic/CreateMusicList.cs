@@ -8,7 +8,6 @@ public class CreateMusicList : MonoBehaviour {
 	[SerializeField] CreateMessage createMessage;
 	[SerializeField] DirCheck dirCheck;
 	[SerializeField] CreateJSON createJSON;
-	[SerializeField] GetPxbpInfo getPxbpInfo;//todo 要らなくなったら消す
 	[SerializeField] GetMusicInfo getMusicInfo;
 
 
@@ -112,7 +111,7 @@ public class CreateMusicList : MonoBehaviour {
 	/// <summary>
 	/// 音源ファイルとジャケットファイルと譜面ファイルの存在チェック
 	/// </summary>
-	private bool CheckExistFile ( FileInfo[] musicFolderFiles , string musicName)
+	private void CheckExistFile ( FileInfo[] musicFolderFiles , string musicName)
 	{
 		bool existMusic = false;
 		bool existJacket = false;
@@ -142,21 +141,14 @@ public class CreateMusicList : MonoBehaviour {
 		if (!existMusic)
 		{
 			createMessage.CreateMsg((int)MsgCodeError.noMusic , musicName);
-			return false;//CreateMsgのエラーで止まるはずなのでこれが返ることはない
 		}
 		if (!existPxbp)
 		{
 			createMessage.CreateMsg((int)MsgCodeError.noScore , musicName);
-			return false;//CreateMsgのエラーで止まるはずなのでこれが返ることはない
 		}
 		if (!existJacket)
 		{
 			createMessage.CreateMsg((int)MsgCodeNotice.noJacket , musicName);
-			return false;//これは意味のある戻り値
-		}
-		else
-		{
-			return true;//これは意味のある戻り値
 		}
 	}
 	

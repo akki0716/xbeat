@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class DispMessage : MonoBehaviour {
 
 	[SerializeField] private TextMeshProUGUI msg;
+	[SerializeField] private ScrollRect scrollRect;
+	[SerializeField] private ContentSizeFitter contentSizeFitter;
 
 	public string Message { get; set; }
 
@@ -16,6 +18,8 @@ public class DispMessage : MonoBehaviour {
 		dispMessage = EditMessage(msgLevel , dispMessage);
 		Message += dispMessage;
 		msg.text = Message;
+		contentSizeFitter.SetLayoutVertical();
+		scrollRect.verticalNormalizedPosition = 0;
 		if (msgLevel == 3)
 		{
 			Debug.Log(Message);

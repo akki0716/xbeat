@@ -34,10 +34,12 @@ public class CreateMessage : MonoBehaviour {
 		reboot = 3000, moveCancel, noMusic, noScore, duplicateMusic, duplicateJacket, noMainScore
 	}
 
+
 	//各コードの範囲をintで持つ
 	int[] codeInfoRange = new int[2] { 1000 , 1999 };
 	int[] codeNoticeRange = new int[2] { 2000 , 2999 };
 	int[] codeErrorRange = new int[2] { 3000 , 3999 };
+
 
 	//enumのコード、メッセージの順
 	Dictionary<int,  string> MessageDict = new Dictionary<int , string>()
@@ -45,8 +47,8 @@ public class CreateMessage : MonoBehaviour {
 		/*追加時には末尾にカンマを忘れずに*/
 
 		{(int)MsgCodeInfo.loadStart, "曲ロード開始\n"},
-		{(int)MsgCodeInfo.serching ,  "\"{addMsg1}\"の曲を検索中\n"},
-		{(int)MsgCodeInfo.madeFolder, "\"{addMsg1}\"フォルダを作成しました。\n"},
+		{(int)MsgCodeInfo.serching ,  "{addMsg1}の曲を検索中\n"},
+		{(int)MsgCodeInfo.madeFolder, "{addMsg1}フォルダを作成しました。\n"},
 
 		{(int)MsgCodeNotice.noMusic ,  "ジャンル:{addMsg1}に属する曲がありません。\n"},
 		{(int)MsgCodeNotice.noJacket ,  "\"{addMsg1}\"のジャケットファイルがありません。\n"},
@@ -82,6 +84,7 @@ public class CreateMessage : MonoBehaviour {
 		}
 	}
 
+
 	//こいつがメインのメソッド。
 	/// <summary>
 	/// 各種メッセージを作って画面上に表示する。
@@ -103,6 +106,7 @@ public class CreateMessage : MonoBehaviour {
 		int msgLevel = GetMsgLevel(msgCode);
 		dispMessage.ShowMesseage(msgLevel, message);
 	}
+
 
 	/// <summary>
 	/// メッセージの定義から実際に表示するメッセージに変換する。
@@ -130,110 +134,6 @@ public class CreateMessage : MonoBehaviour {
 		return Msg;
 	}
 
-
-
-	/*
-
-	/// <summary>
-	/// 通常メッセージを作ってDispMessageに投げる
-	/// </summary>
-	/// <param name="msgcode">CreateMessageで定義されているコード</param>
-	/// <param name="addMsg">追加メッセージ。省略可</param>
-	/// <param name="overWrite">メッセージを上書きするか。省略可</param>
-	public void CreateMsg ( Msgcode msgcode , string addMsg = null, bool overWrite = false)
-	{
-
-		string msg;
-		switch (msgcode)
-		{
-			case Msgcode.loadStart:
-				msg = "曲ロード開始\n";
-				break;
-			case Msgcode.serching:
-				msg = addMsg + "の曲を検索中\n";
-				break;
-			case Msgcode.madeFolder:
-				msg = addMsg + "フォルダを作成しました。\n";
-				break;
-			case Msgcode.restart:
-				msg = "アプリを再起動してください\n";
-				break;
-			case Msgcode.moveCancel:
-				msg = "\n遷移キャンセル\n";
-				msg += "アプリを再起動してください\n";
-				break;
-			default:
-				msg = "定義されていないメッセージです。\n";
-				break;
-		}
-		dispMessage.ShowLoadingMesseage(msg,overWrite);
-	}
-
-	*/
-	/*
-	/// <summary>
-	/// エラーメッセージを作ってDispMessageに投げる
-	/// </summary>
-	/// <param name="errcode">CreateMessageで定義されているコード</param>
-	/// <param name="addMsg">追加メッセージ。省略可</param>
-	/// <param name="overWrite">メッセージを上書きするか。省略可</param>
-	public void CreateErrMsg ( Errcode errcode , string addMsg = null , bool overWrite = false )
-	{
-		string msg;
-		switch (errcode)
-		{
-			case Errcode.noSong:
-				msg = "ジャンル:"+ addMsg + "に属する曲がありません。\n";
-				break;
-			case Errcode.noSound:
-				msg = addMsg + "の音源ファイルがありません。\n";
-				break;
-			case Errcode.noJacket:
-				msg = addMsg + "のジャケットファイルがありません。\n";
-				break;
-			case Errcode.noScore:
-				msg = addMsg + "の譜面ファイルがありません。\n";
-				break;
-			case Errcode.multipleDifficalty:
-				msg = addMsg + "フォルダ内に同一難易度の譜面が入っています。\n";
-				msg += "ファイル情報は後に読み込んだもので上書きされます。\n";
-				break;
-			default:
-				msg = "定義されていないエラーメッセージです。\n";
-				break;
-		}
-		dispMessage.ShowErrMesseage(msg , overWrite);
-	}
-	*/
-	
-
-		/*
-	public IEnumerator CountdownCoroutine ( UnityAction callback )
-	{
-		int countTime = 3;
-		string baseText1 = "曲ロードが終了しました。";
-		string baseText2 = "秒後に画面遷移します。";
-		string baseText3 = "\n画面右を長押しで遷移キャンセル";
-
-		string text = baseText1 + countTime + baseText2 + baseText3;
-		dispMessage.ShowMesseage(text , true);
-		yield return new WaitForSeconds(1.0f);
-
-		countTime--;
-		text = baseText1 + countTime + baseText2 + baseText3;
-		dispMessage.ShowMesseage(text , true);
-		yield return new WaitForSeconds(1.0f);
-
-		countTime--;
-		text = baseText1 + countTime + baseText2 + baseText3;
-		dispMessage.ShowMesseage(text , true);
-		yield return new WaitForSeconds(1.0f);
-
-
-		yield return new WaitForSeconds(1.0f);
-		callback();
-	}
-	*/
 
 	private int GetMsgLevel (int msgCode)
 	{

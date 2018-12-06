@@ -97,11 +97,18 @@ public class GetMusicInfo : MonoBehaviour {
 
 			if (pxbp.ContainsKey(JacketPath))
 			{
-				scoreInfo.MusicPath = (string)pxbp[musicPath];
+				scoreInfo.JacketPath = (string)pxbp[musicPath];
 			}
 			else
 			{
-				scoreInfo.MusicPath = ResourcePath["JacketPath"];
+				if (ResourcePath.ContainsKey("JacketPath"))
+				{
+					scoreInfo.JacketPath = ResourcePath["JacketPath"];
+				}
+				else
+				{
+					scoreInfo.JacketPath = "-1";
+				}
 			}
 
 			//曲名と同名の譜面ファイルならそれを代表として曲名とアーティスト名を拾う
